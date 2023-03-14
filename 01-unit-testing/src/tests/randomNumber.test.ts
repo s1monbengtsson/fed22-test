@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest'
-import { getRandomNumber } from './randomNumber'
+import { getRandomNumber } from '../randomNumber'
 
 
 test('generates 10 random numbers between 1-10', () => {

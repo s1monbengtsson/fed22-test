@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { add, sub } from './sum'
+import { add, sub } from '../sum'
 
 describe('tests addition', () => {
 	it('should add two numbers', () => {
