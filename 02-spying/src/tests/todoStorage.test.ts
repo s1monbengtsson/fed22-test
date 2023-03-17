@@ -1,11 +1,12 @@
+/**
+ * @vitest-environment happy-dom
+ */
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getTodos, saveTodos } from '../utils/todoStorage'
-import mockLocalStorage from '../mocks/mockedLocalStorage'
+// import mockLocalStorage from '../mocks/mockedLocalStorage'
 import { Todo } from '../types/Todo'
 
-
-
-global.localStorage = mockLocalStorage()
+// global.localStorage = mockLocalStorage()
 
 const TODO: Todo =  {
     id: 1,
@@ -43,7 +44,6 @@ describe('save todos', () => {
         const todos = getTodos()
         expect(todos.length).toBe(1)
         expect(todos).toContainEqual(TODO)
-
     })
 })
 
