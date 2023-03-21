@@ -46,7 +46,7 @@ todosEl.addEventListener('click', async (e: MouseEvent) => {
 		// get and re-render todos
 		getAndRenderTodos()
 	}
-});
+})
 
 // create a new todo form
 newTodoFormEl.addEventListener('submit', async (e: SubmitEvent) => {
