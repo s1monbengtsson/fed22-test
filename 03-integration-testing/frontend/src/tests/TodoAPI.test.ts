@@ -25,12 +25,47 @@ describe('TodoAPI', () => {
         })
     })
 
-    it.todo('should create and then get the todo')
+    it('should create and then get the todo', async () => {
+        const result = await TodoAPI.createTodo(newTodo)
+        const todo = await TodoAPI.getTodo(result.id)
 
-    it.todo('should create and then find the todo amoung all todos')
-    
-    it.todo('should create and then update the todo')
+        /*
+        expect(todo).toMatchObject({
+            id: result.id,
+            title: todo.title,
+            completed: todo.completed
+        })
+        */
 
-    it.todo('should create and then delete the todo')
+        expect(todo).toStrictEqual(result)
+    })
 
+    it('should create and then find the todo among all todos', async () => {
+        const result = await TodoAPI.createTodo(newTodo)
+        const todos = await TodoAPI.getTodos()
+
+        expect(todos).toContainEqual(result)
+    })
+ 
+    it('should create and then update the todo', async () => {
+        const result = await TodoAPI.createTodo(newTodo)
+        const updatedTodo = await TodoAPI.updateTodo(result.id, {
+            completed: !result.completed
+        })
+        expect(updatedTodo.completed).toBe(!result.completed)
+
+        expect(updatedTodo).toMatchObject({
+            id: result.id,
+            title: result.title,
+            completed: !result.completed
+        })
+    })
+
+    it('should create and then delete the todo', async () => {
+        const result = await TodoAPI.createTodo(newTodo)
+        await TodoAPI.deleteTodo(result.id)
+        const todos = await TodoAPI.getTodos()
+
+        expect(todos).not.toContainEqual(result)
+    })
 })
