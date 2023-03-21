@@ -8,7 +8,9 @@ describe('TodoAPI', () => {
     it.todo('should create a new todo')
 
     it.todo('should create and then get the todo')
-
+    
+    it.todo('should create and then find the todo amoung all todos')
+    
     it.todo('should create and then update the todo')
 
     it.todo('should create and then delete the todo')
