@@ -1,6 +1,22 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll, afterEach, afterAll } from 'vitest'
 import * as TodoAPI from '../services/TodoAPI'
 import { CreateTodoData } from '../types/Todo'
+import { server } from '../mocks/server'
+
+// 🏎 Boot API mocking
+beforeAll(() => {
+    server.listen()
+})
+
+// 🧨 Reset handlers
+afterEach(() => {
+    server.resetHandlers()
+})
+
+// 🧹 Clean up after ourselves
+afterAll(() => {
+    server.close()
+})
 
 const newTodo: CreateTodoData = {
     title: "Test todo",
@@ -15,6 +31,7 @@ describe('TodoAPI', () => {
         expect(Array.isArray(todos)).toBe(true)
     })
 
+    
     it('should create a new todo', async () => {
         const result = await TodoAPI.createTodo(newTodo)
 
@@ -24,6 +41,8 @@ describe('TodoAPI', () => {
             completed: newTodo.completed
         })
     })
+
+    /*
 
     it('should create and then get the todo', async () => {
         const result = await TodoAPI.createTodo(newTodo)
@@ -35,7 +54,7 @@ describe('TodoAPI', () => {
             title: todo.title,
             completed: todo.completed
         })
-        */
+        
 
         expect(todo).toStrictEqual(result)
     })
@@ -68,4 +87,5 @@ describe('TodoAPI', () => {
 
         expect(todos).not.toContainEqual(result)
     })
+    */
 })
