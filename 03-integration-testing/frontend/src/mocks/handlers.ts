@@ -1,5 +1,6 @@
 import { rest } from 'msw'
-import { Todo, CreateTodoData } from '../types/Todo'
+import { updateTodo } from '../services/TodoAPI'
+import { Todo, CreateTodoData, UpdateTodoData } from '../types/Todo'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -78,7 +79,29 @@ export const handlers = [
 
     // Mock update a todo
     // PATCH http://localhost:3001/todos/:todoId
-    // rest.patch(`${BASE_URL}/todos/:todoId`, null),
+    rest.patch(`${BASE_URL}/todos/:todoId`, async (req, res, ctx) => {
+        const todoId = Number(req.params.todoId)
+        const payload = await req.json<Partial<UpdateTodoData>>()
+
+        // find the todo among all todos
+        const todo = dummyTodos.find(todo => todo.id === todoId)
+
+        if (!todo) {
+            return res(
+                ctx.status(404),
+                ctx.json({})
+            )
+        }
+
+        // update todo with payload
+        todo.title = payload.title ?? todo.title,
+        todo.completed = payload.completed ?? todo.completed
+
+        return res(
+            ctx.status(200),
+            ctx.json(todo)
+        )
+    }),
 
     // Mock delete a todo
     // DELETE http://localhost:3001/todos/:todoId
