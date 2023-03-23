@@ -42,7 +42,7 @@ describe('TodoAPI', () => {
         })
     })
 
-    /*
+    
 
     it('should create and then get the todo', async () => {
         const result = await TodoAPI.createTodo(newTodo)
@@ -54,11 +54,12 @@ describe('TodoAPI', () => {
             title: todo.title,
             completed: todo.completed
         })
-        
+        */
 
         expect(todo).toStrictEqual(result)
     })
 
+    /*
     it('should create and then find the todo among all todos', async () => {
         const result = await TodoAPI.createTodo(newTodo)
         const todos = await TodoAPI.getTodos()
