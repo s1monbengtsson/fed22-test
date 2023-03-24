@@ -3,6 +3,7 @@ describe('Home Page', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
   })
+  
     it('h1 contains the correct text', () => {
       cy.get('[data-test="hero-heading"]')
         .should('exist')
